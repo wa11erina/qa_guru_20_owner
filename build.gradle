@@ -1,0 +1,51 @@
+plugins {
+    id 'java-library'
+    id 'io.qameta.allure' version '2.11.2'
+}
+
+group = 'guru.qa'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+def jUnitVersion = "5.10.0-RC1",
+    selenideVersion = "6.16.0",
+    seleniumVersion = "4.10.0",
+    webDriverManagerVersion = "5.4.0",
+    ownerVersion = "1.0.12",
+    assertjCoreVersion = "3.24.2",
+    slf4jVersion = "2.0.7",
+    allureVersion = "2.23.0"
+
+allure {
+    report {
+        version.set(allureVersion)
+    }
+    adapter {
+        aspectjWeaver.set(true)
+        frameworks {
+            junit5 {
+                adapterVersion.set(allureVersion)
+            }
+        }
+    }
+}
+
+dependencies {
+    testImplementation(
+            "org.junit.jupiter:junit-jupiter:$jUnitVersion",
+            "org.seleniumhq.selenium:selenium-java:$seleniumVersion",
+            "com.codeborne:selenide:$selenideVersion",
+            "io.github.bonigarcia:webdrivermanager:$webDriverManagerVersion",
+            "org.aeonbits.owner:owner:$ownerVersion",
+            "org.assertj:assertj-core:$assertjCoreVersion",
+            "org.slf4j:slf4j-simple:$slf4jVersion",
+            "io.qameta.allure:allure-selenide:$allureVersion")
+}
+
+test {
+    useJUnitPlatform()
+    systemProperties(System.getProperties())
+}
