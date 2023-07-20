@@ -16,26 +16,12 @@ import static org.openqa.selenium.logging.LogType.BROWSER;
 public class Attach {
     @Attachment(value = "{attachName}", type = "image/png")
     public static byte[] screenshotAs(String attachName) {
-        try {
-            byte[] result = ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES);
-            return result;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-        return new byte[0];
+        return ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES);
     }
 
     @Attachment(value = "Page source", type = "text/plain")
     public static byte[] pageSource() {
-        try {
-            byte[] result = getWebDriver().getPageSource().getBytes(StandardCharsets.UTF_8);
-            return result;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-        return new byte[0];
+        return getWebDriver().getPageSource().getBytes(StandardCharsets.UTF_8);
     }
 
     @Attachment(value = "{attachName}", type = "text/plain")
@@ -44,15 +30,10 @@ public class Attach {
     }
 
     public static void browserConsoleLogs() {
-        try {
-            attachAsText(
-                    "Browser console logs",
-                    String.join("\n", Selenide.getWebDriverLogs(BROWSER))
-            );
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
+        attachAsText(
+                "Browser console logs",
+                String.join("\n", Selenide.getWebDriverLogs(BROWSER))
+        );
     }
 
     @Attachment(value = "Video", type = "text/html", fileExtension = ".html")
@@ -64,7 +45,6 @@ public class Attach {
 
     public static URL getVideoUrl() {
         String videoUrl = "https://selenoid.autotests.cloud/video/" + sessionId() + ".mp4";
-        //  System.out.println(sessionId());
         try {
             return new URL(videoUrl);
         } catch (MalformedURLException e) {
