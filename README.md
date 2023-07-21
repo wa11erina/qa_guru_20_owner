@@ -15,7 +15,7 @@ gradle clean test -Dbrowser=chrome
 Run on remote hub with explicit auth:
 
 ```bash
-gradle clean test -DremoteUrl="https://user1:1234@selenoid.autotests.cloud/wd/hub/"
+gradle :test --tests "guru.qa.tests.GitHubSearchTest.blueSkySocialGitHubSearch" -Denv=local -DisRemote=true
 ```
 
 Serve report:
