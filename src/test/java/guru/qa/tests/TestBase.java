@@ -23,7 +23,7 @@ public class TestBase {
     @BeforeAll
     static void beforeAll() {
         Configuration.pageLoadStrategy = "eager";
-        Configuration.holdBrowserOpen = true;
+        Configuration.holdBrowserOpen = false;
         Configuration.pollingInterval = 400;
         Configuration.baseUrl = config.baseUrl();
         Configuration.browser = config.browser();

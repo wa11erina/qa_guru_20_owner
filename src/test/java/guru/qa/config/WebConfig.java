@@ -5,7 +5,7 @@ import org.aeonbits.owner.Config;
 @Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
         "system:properties",
-        "classpath:${env}.properties"
+        "classpath:configs/${env}.properties"
 })
 public interface WebConfig extends Config {
     @Key("browser")
@@ -29,6 +29,6 @@ public interface WebConfig extends Config {
     String remoteUrl();
 
     @Key("isRemote")
-    @DefaultValue("true")
+    @DefaultValue("false")
     boolean isRemote();
 }
